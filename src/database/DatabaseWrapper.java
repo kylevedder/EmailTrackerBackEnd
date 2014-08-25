@@ -66,6 +66,31 @@ public class DatabaseWrapper
     }
 
     /**
+     * Returns the viewcount for a particular ID
+     * @param id ID of image to get.
+     * @return -1 for error, or viewcount.
+     */
+    public int getViewcount(int id)
+    {
+        try
+        {
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id;
+            ResultSet rs = stmt.executeQuery(SQL);
+            //if exists
+            if (rs.first())
+            {
+                return rs.getInt(ID);                
+            }
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(DatabaseWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+    
+    /**
      * Increments the viewcount on the item of the specified ID
      *
      * @param id ID of the item whose viewcount is to be incremented.
@@ -79,9 +104,8 @@ public class DatabaseWrapper
             String SQL = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id;
             ResultSet rs = stmt.executeQuery(SQL);
             //if exists
-            if (rs.next())
-            {
-                rs.first();
+            if (rs.first())
+            {                
                 rs.updateInt(VIEWS, (rs.getInt(VIEWS) + 1));
                 rs.updateRow();
                 return true;
