@@ -11,8 +11,8 @@ API:
 ===================
 This is an entirly HTTP GET based API, and only three URIs are needed to operate:
 
-<b>/GET_ID</b> - returns a new unique ID in JSON format. Key is "ID" if succesful, "error" if erronious.
+/GET_ID</b> - returns a new unique ID in JSON format. Key is "ID" if succesful, "error" if erronious.
 
-<b>/GET_IMAGE//</id/></b> - returns the image and increments the given id's view counter. Returns JSON with a key of "error" if erronious.
+/GET_IMAGE/<id> - returns the image and increments the given id's view counter. Returns JSON with a key of "error" if erronious.
 
-<b>/GET_COUNT//</id/></b>  - returns the count of the views of the image in JSON with a Key of "viewcount" if succesful or "error" if erronious.
+/GET_COUNT/<id>  - returns the count of the views of the image in JSON with a Key of "viewcount" if succesful or "error" if erronious.
